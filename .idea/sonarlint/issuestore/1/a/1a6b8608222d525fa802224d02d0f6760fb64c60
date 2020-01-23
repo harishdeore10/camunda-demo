@@ -1,0 +1,5 @@
+
+Msquid:S1068"*Remove this unused "logger" private field.(ò­ğ¿ûÿÿÿÿ8›Âùùï-
+=squid:S1700$"Rename field "application"(‹µÈùÿÿÿÿ8›Âùùï-
+msquid:UselessImportCheck"BRemove this unused import 'org.camunda.bpm.engine.RuntimeService'.(«ŞĞ8­ì€úï-
+osquid:UselessImportCheck"?Remove this unused import 'org.camunda.bpm.engine.TaskService'.(Òº¢‹úÿÿÿÿ8­ì€úï-

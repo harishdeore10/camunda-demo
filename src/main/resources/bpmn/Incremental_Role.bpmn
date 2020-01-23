@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_0hxt7pi" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.5.0">
+  <bpmn:process id="InrementalRoleFlow" name="InrementalRoleFlow" isExecutable="true" camunda:versionTag="1.0">
+    <bpmn:startEvent id="StartEvent_1" name="Start">
+      <bpmn:outgoing>Start</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:endEvent id="End" name="End">
+      <bpmn:incoming>flow5</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:exclusiveGateway id="Gateway_1" name="Decision">
+      <bpmn:incoming>flow2</bpmn:incoming>
+      <bpmn:outgoing>flow3</bpmn:outgoing>
+      <bpmn:outgoing>flow7</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="flow2" sourceRef="Approver_1" targetRef="Gateway_1" />
+    <bpmn:sequenceFlow id="flow3" name="yes" sourceRef="Gateway_1" targetRef="Approver_2">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${approved == "true"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="flow4" sourceRef="Approver_2" targetRef="Gateway_2" />
+    <bpmn:exclusiveGateway id="Gateway_2" name="Decision">
+      <bpmn:incoming>flow4</bpmn:incoming>
+      <bpmn:outgoing>flow5</bpmn:outgoing>
+      <bpmn:outgoing>flow6</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="flow5" name="Yes" sourceRef="Gateway_2" targetRef="End">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${approved == "true"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="flow6" name="No" sourceRef="Gateway_2" targetRef="Approver_1">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${approved == "false"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="flow7" name="No" sourceRef="Gateway_1" targetRef="HiringManager">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${approved == "false"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Start" sourceRef="StartEvent_1" targetRef="HiringManager" />
+    <bpmn:sequenceFlow id="flow1" sourceRef="HiringManager" targetRef="Approver_1" />
+    <bpmn:userTask id="Approver_1" name="Approver 1" camunda:assignee="${assignee}">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="approved" label="do you approve?" type="boolean" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>flow6</bpmn:incoming>
+      <bpmn:incoming>flow1</bpmn:incoming>
+      <bpmn:outgoing>flow2</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="Approver_2" name="Approver 2" camunda:assignee="${assignee}">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="approved" label="do you appove?" type="boolean" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>flow3</bpmn:incoming>
+      <bpmn:outgoing>flow4</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="HiringManager" name="Hiring Manager" camunda:assignee="${assignee}">
+      <bpmn:incoming>flow7</bpmn:incoming>
+      <bpmn:incoming>Start</bpmn:incoming>
+      <bpmn:outgoing>flow1</bpmn:outgoing>
+    </bpmn:userTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="InrementalRoleFlow">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="152" y="159" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="158" y="202" width="25" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_16v8pmo_di" bpmnElement="End">
+        <dc:Bounds x="882" y="159" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="890" y="202" width="20" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ExclusiveGateway_1dam6eb_di" bpmnElement="Gateway_1" isMarkerVisible="true">
+        <dc:Bounds x="505" y="152" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="510" y="122" width="43" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_06tp9vq_di" bpmnElement="flow2">
+        <di:waypoint x="480" y="177" />
+        <di:waypoint x="505" y="177" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="476" y="159" width="33" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1x47pba_di" bpmnElement="flow3">
+        <di:waypoint x="555" y="177" />
+        <di:waypoint x="610" y="177" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="574" y="159" width="17" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1scjlny_di" bpmnElement="flow4">
+        <di:waypoint x="710" y="177" />
+        <di:waypoint x="755" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ExclusiveGateway_1ij5dsk_di" bpmnElement="Gateway_2" isMarkerVisible="true">
+        <dc:Bounds x="755" y="152" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="760" y="209" width="43" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1sqwyt3_di" bpmnElement="flow5">
+        <di:waypoint x="805" y="177" />
+        <di:waypoint x="882" y="177" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="835" y="159" width="18" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0jaeka2_di" bpmnElement="flow6">
+        <di:waypoint x="780" y="152" />
+        <di:waypoint x="780" y="60" />
+        <di:waypoint x="430" y="60" />
+        <di:waypoint x="430" y="137" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="598" y="42" width="15" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_14bucpz_di" bpmnElement="flow7">
+        <di:waypoint x="530" y="202" />
+        <di:waypoint x="530" y="320" />
+        <di:waypoint x="290" y="320" />
+        <di:waypoint x="290" y="220" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="404" y="302" width="15" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_130uz5u_di" bpmnElement="Start">
+        <di:waypoint x="188" y="177" />
+        <di:waypoint x="240" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1d99mqm_di" bpmnElement="flow1">
+        <di:waypoint x="340" y="177" />
+        <di:waypoint x="380" y="177" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="344" y="159" width="33" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="UserTask_1t8evse_di" bpmnElement="Approver_1">
+        <dc:Bounds x="380" y="137" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_0vfs7s6_di" bpmnElement="Approver_2">
+        <dc:Bounds x="610" y="137" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_1k6s9g0_di" bpmnElement="HiringManager">
+        <dc:Bounds x="240" y="137" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

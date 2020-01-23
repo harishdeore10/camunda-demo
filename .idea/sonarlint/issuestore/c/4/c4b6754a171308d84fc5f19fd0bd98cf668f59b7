@@ -1,0 +1,13 @@
+
+qsquid:S1450""SRemove the "task" field and declare it as a local variable in the relevant methods.(³´Û¸8±“òø-
+<squid:S2119U"Save and re-use this "Random".(–áÍÈ8ó™ªòø-
+Hsquid:S3457S"%String contains no format specifiers.(¼ï–åùÿÿÿÿ8Áéñûï-
+asquid:S37529">Add a "method" parameter to this "@RequestMapping" annotation.(í—¿‰ÿÿÿÿÿ8Ä¹úúï-
+†squid:S1488Z"cImmediately return this expression instead of assigning it to the temporary variable "taskDetails".(ş¤Ú÷üÿÿÿÿ8¯Ÿâñø-
+~squid:S1450$"`Remove the "processInstanceId" field and declare it as a local variable in the relevant methods.(Â¶½†8Ä¹úúï-
+[squid:S3752B">Add a "method" parameter to this "@RequestMapping" annotation.(€öx8Å­½ûï-
+\squid:S3752L">Add a "method" parameter to this "@RequestMapping" annotation.(Û’²Š8™Çåûï-
+Osquid:S1612Z",Replace this lambda with a method reference.(ş¤Ú÷üÿÿÿÿ8‚¤áñø-
+_squid:S34575"AFormat specifiers should be used instead of string concatenation.(±ğÏ¢8Ä¹úúï-
+\squid:S3752&">Add a "method" parameter to this "@RequestMapping" annotation.(È¡³8Ä¹úúï-
+asquid:S37521">Add a "method" parameter to this "@RequestMapping" annotation.(®²ı†ıÿÿÿÿ8Ä¹úúï-
